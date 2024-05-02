@@ -80,18 +80,28 @@
 								
 							</div>
 							<div class="row mx-0 ">
-								<xsl:for-each select="exercise">
+								<xsl:for-each select="./exercise">
 									<div class="col-lg-6 d-flex pb-2" >
 										<div class="card bg-light mt-1">
 											<div class="row mx-0 pt-2 ">
-												<div class="col-6">
-													<img class="img-fluid" src="{gifUrl}" alt=""/>
-												</div>
-												<div class="col-6 ps-2 text-primary">
-													<h3><strong><xsl:value-of select="name"/></strong></h3>
-													<h5>Body Part: <xsl:value-of select="bodyPart"/></h5>
-													<h5>Equipment: <xsl:value-of select="equipment"/></h5>
-												</div>
+												<xsl:choose>
+													<xsl:when test="./gifUrl=''">
+														<div class="col-6"><img src="img/noimage.png" class="img-fluid" alt=""/></div>
+														<div class="col-6 p-3 text-primary bg-light" style="font-weight: bold;">
+															<p class="fs-4"><xsl:value-of select="name"/></p>
+															<p  class="fs-6">Body Part: <xsl:value-of select="bodyPart"/><br/> Equipment: <xsl:value-of select="equipment"/></p>
+														</div>
+													</xsl:when>
+													
+													<xsl:otherwise>
+														<div class="col-6"><img src="{gifUrl}" class="img-fluid" alt=""/></div>
+														<div class="col-6 p-3 text-primary bg-light" style="font-weight: bold;">
+															<p class="fs-4"><xsl:value-of select="name"/></p>
+															<p  class="fs-6">Body Part: <xsl:value-of select="bodyPart"/><br/> Equipment: <xsl:value-of select="equipment"/></p>
+														</div>
+													</xsl:otherwise>
+												</xsl:choose>
+												
 											</div>
 											
 										</div>
